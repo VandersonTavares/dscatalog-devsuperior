@@ -49,4 +49,13 @@ public class CategoryService {
 		return new CategoryDTO(entity); // o método retorna um DTO e não a entity então precisamos do new
 	}
 
+	@Transactional
+	public CategoryDTO insert(CategoryDTO dto) {
+		Category entity = new Category();
+		entity.setName(dto.getName());
+		entity = repository.save(entity);
+		return new CategoryDTO(entity); 
+		
+	}
+
 }

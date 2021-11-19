@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.devsuperior.dscatalog.resources.exceptions.StandardError;
-import com.devsuperior.dscatalog.services.exceptions.EntityNotFoundException;
 
 //intercepta exceções no resource
 @ControllerAdvice
