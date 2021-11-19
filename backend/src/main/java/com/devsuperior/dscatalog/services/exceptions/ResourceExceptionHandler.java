@@ -15,8 +15,8 @@ import com.devsuperior.dscatalog.resources.exceptions.StandardError;
 @ControllerAdvice
 public class ResourceExceptionHandler {
 
-	@ExceptionHandler(EntityNotFoundException.class) //sempre que houver alguma exceção nos controladores rest, o tratamento vais ser direcionado pra cá
-	public ResponseEntity<StandardError> entityNotFound(EntityNotFoundException e, HttpServletRequest request){
+	@ExceptionHandler(ResourceNotFoundException.class) //sempre que houver alguma exceção nos controladores rest, o tratamento vais ser direcionado pra cá
+	public ResponseEntity<StandardError> entityNotFound(ResourceNotFoundException e, HttpServletRequest request){
 		StandardError err = new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(HttpStatus.NOT_FOUND.value()); //o .value converte para inteiro

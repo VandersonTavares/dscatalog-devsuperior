@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.devsuperior.dscatalog.dto.CategoryDTO;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.repositories.CategoryRepository;
-import com.devsuperior.dscatalog.services.exceptions.EntityNotFoundException;
+import com.devsuperior.dscatalog.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class CategoryService {
@@ -40,7 +42,8 @@ public class CategoryService {
 		Optional<Category> obj = repository.findById(id);
 		// Category entity = obj.get(); // o get do Optional obtem o objeto dentro do
 		// optional
-		Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Entity not Found")); // permite chamar uma
+		Category entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not Found")); // permite chamar
+																									// uma
 																									// chamada de
 																									// exceção caso o
 																									// obj não seja
@@ -54,8 +57,21 @@ public class CategoryService {
 		Category entity = new Category();
 		entity.setName(dto.getName());
 		entity = repository.save(entity);
-		return new CategoryDTO(entity); 
-		
+		return new CategoryDTO(entity);
+
+	}
+
+	@Transactional
+	public CategoryDTO update(Long id, CategoryDTO dto) {
+		try {
+			Category entity = repository.getOne(id); // instancia um obj provisorio, somente qnd mandamos salvar que ele
+														// irá ao bd
+			entity.setName(dto.getName()); // na categoria so mudamos o nome o id é autoincrrementado pelo bd
+			entity = repository.save(entity);
+			return new CategoryDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found "+ id);
+		}
 	}
 
 }
