@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.devsuperior.dscatalog.entities.Category;
 import com.devsuperior.dscatalog.services.CategoryService;
 
+//Vai listar as categorias
+
 @RestController
 @RequestMapping(value = "/categories")
 public class CategoryResource {
@@ -23,6 +25,7 @@ public class CategoryResource {
 		
 		List<Category> list = service.findAll();
 		
+		//List<Category> list = ArrayList<>();
 		/*
 		list.add(new Category(1L, "Book"));
 		list.add(new Category(2L, "Eletronics"));
