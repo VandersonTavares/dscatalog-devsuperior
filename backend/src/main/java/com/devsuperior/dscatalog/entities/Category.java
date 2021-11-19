@@ -23,12 +23,14 @@ public class Category implements Serializable {
 	private Long id;
 	private String name;
 
+	//--dados de autitoria - horas de atualizações das categorias
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant createdAt;
 
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant updatedAt;
-
+	//-------------------
+	
 	public Category() {
 	}
 

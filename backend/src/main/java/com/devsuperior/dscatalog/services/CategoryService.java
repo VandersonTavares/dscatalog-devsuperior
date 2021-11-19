@@ -1,14 +1,14 @@
 package com.devsuperior.dscatalog.services;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,19 +24,19 @@ public class CategoryService {
 	@Autowired // injeta automaticamente uma dependencia gerenciada pelo spring
 	private CategoryRepository repository;
 
+	/* PARTE 1 NO RESOURCE
 	// Retorna uma lista de categorias do banco
 	@Transactional(readOnly = true) // em transações que são somente leitura preciso colocar isso
 	public List<CategoryDTO> findAll() {
 		List<Category> list = repository.findAll();
 		return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
-
-		// ou
-		/*
-		 * List<CategoryDTO> listDto = new ArrayList<>(); for(Category cat : list) {
-		 * listDto.add(new CategoryDTO(cat)); }
-		 * 
-		 * return listDto;
-		 */
+	}
+	*/
+	//retorna uma busca paginada 
+	@Transactional(readOnly = true) 
+	public Page<CategoryDTO> findAllPaged(PageRequest pageRequest) {
+		Page<Category> list = repository.findAll(pageRequest);
+		return list.map(x -> new CategoryDTO(x));
 	}
 
 	// retorna uma categoria por id
