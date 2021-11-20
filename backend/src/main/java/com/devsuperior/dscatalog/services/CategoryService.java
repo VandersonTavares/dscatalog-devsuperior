@@ -55,6 +55,7 @@ public class CategoryService {
 		return new CategoryDTO(entity); // o método retorna um DTO e não a entity então precisamos do new
 	}
 
+	//Insere uma nova categoria
 	@Transactional
 	public CategoryDTO insert(CategoryDTO dto) {
 		Category entity = new Category();
@@ -64,6 +65,7 @@ public class CategoryService {
 
 	}
 
+	//Atualiza uma categoria por ID
 	@Transactional
 	public CategoryDTO update(Long id, CategoryDTO dto) {
 		try {
@@ -77,6 +79,7 @@ public class CategoryService {
 		}
 	}
 
+	//deleta uma categoria por ID
 	// não coloca o transactional pq precisamos capturar uma exceção no bd
 	public void delete(Long id) {
 		try {
