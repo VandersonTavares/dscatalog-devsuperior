@@ -23,7 +23,7 @@ public class CategoryService {
 
 	@Autowired // injeta automaticamente uma dependencia gerenciada pelo spring
 	private CategoryRepository repository;
-
+	
 	/* PARTE 1 NO RESOURCE
 	// Retorna uma lista de categorias do banco
 	@Transactional(readOnly = true) // em transações que são somente leitura preciso colocar isso
